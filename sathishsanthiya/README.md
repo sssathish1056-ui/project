@@ -14,6 +14,14 @@ Built with Machine Learning, Node.js, and Modern Web Technologies
 
 ---
 
+## 🌐 Live Demo
+
+🚀 **Try it now!** [View Live Site](https://sssathish1056-ui.github.io/Mini-project/)
+
+> 💡 *Note: Enable GitHub Pages in your repository settings to get your live link. See [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md) for instructions.*
+
+---
+
 ## ✨ Features
 
 - 🤖 **AI-Powered Predictions**: Uses ensemble machine learning models (Logistic Regression, Random Forest, KNN, Gradient Boosting)

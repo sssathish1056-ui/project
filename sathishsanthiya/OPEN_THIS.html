@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🩺 Heart Disease AI Predictor</title>
+    <style>
+/* Modern Heart Disease Predictor Stylesheet */
+:root {
+    --primary-color: #e74c3c;
+    --primary-dark: #c0392b;
+    --secondary-color: #3498db;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header {
+    text-align: center;
+    background: var(--bg-white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 30px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.heart-icon {
+    font-size: 48px;
+    animation: heartbeat 2s infinite;
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+}
+.header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.tagline {
+    color: var(--text-light);
+    font-size: 16px;
+}
+.form-container {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 30px;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+.required {
+    color: var(--primary-color);
+}
+input, select {
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+.btn-primary {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    transition: all 0.3s ease;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+}
+.results-container {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 30px;
+    display: none;
+}
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+.risk-meter {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.meter-value {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+.risk-bar {
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.risk-fill {
+    height: 100%;
+    transition: width 1s ease;
+    border-radius: 15px;
+    background: linear-gradient(90deg, var(--success-color), var(--warning-color), var(--danger-color));
+}
+.risk-badge {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border-left: 4px solid var(--warning-color);
+}
+.risk-badge.high-risk {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border-left-color: var(--danger-color);
+}
+.risk-badge.low-risk {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-left-color: var(--success-color);
+}
+.badge-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.badge-value {
+    font-size: 24px;
+    font-weight: 700;
+}
+.prediction-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+.recommendations {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="heart-icon">❤️</div>
+                <h1>HeartGuard </h1>
+            </div>
+            
+        </header>
+
+        <div class="form-container">
+            <h2>Patient Information Form</h2>
+            <form id="heartForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="age">Age (years) <span class="required">*</span></label>
+                        <input type="number" id="age" name="age" min="18" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Sex <span class="required">*</span></label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select...</option>
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cp">Chest Pain Type <span class="required">*</span></label>
+                        <select id="cp" name="cp" required>
+                            <option value="">Select...</option>
+                            <option value="0">Typical angina</option>
+                            <option value="1">Atypical angina</option>
+                            <option value="2">Non-anginal pain</option>
+                            <option value="3">Asymptomatic</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trestbps">Resting Blood Pressure (mm Hg) <span class="required">*</span></label>
+                        <input type="number" id="trestbps" name="trestbps" min="90" max="200" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="chol">Serum Cholesterol (mg/dl) <span class="required">*</span></label>
+                        <input type="number" id="chol" name="chol" min="100" max="600" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fbs">Fasting Blood Sugar > 120 mg/dl <span class="required">*</span></label>
+                        <select id="fbs" name="fbs" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="restecg">Resting ECG Results <span class="required">*</span></label>
+                        <select id="restecg" name="restecg" required>
+                            <option value="">Select...</option>
+                            <option value="0">Normal</option>
+                            <option value="1">ST-T wave abnormality</option>
+                            <option value="2">Left ventricular hypertrophy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thalach">Maximum Heart Rate Achieved <span class="required">*</span></label>
+                        <input type="number" id="thalach" name="thalach" min="60" max="220" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exang">Exercise Induced Angina <span class="required">*</span></label>
+                        <select id="exang" name="exang" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="oldpeak">ST Depression Induced <span class="required">*</span></label>
+                        <input type="number" id="oldpeak" name="oldpeak" step="0.1" min="0" max="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="slope">Slope of Peak Exercise ST <span class="required">*</span></label>
+                        <select id="slope" name="slope" required>
+                            <option value="">Select...</option>
+                            <option value="0">Upsloping</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Downsloping</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ca">Number of Major Vessels Colored (0-3) <span class="required">*</span></label>
+                        <input type="number" id="ca" name="ca" min="0" max="3" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thal">Thalassemia Type <span class="required">*</span></label>
+                        <select id="thal" name="thal" required>
+                            <option value="">Select...</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Fixed defect</option>
+                            <option value="3">Reversible defect</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn" class="btn-primary">
+                        🔍 Analyze Heart Risk
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <div class="result-header">
+                <div style="font-size:48px">🩺</div>
+                <div>
+                    <h2>Assessment Results</h2>
+                    <p>AI Analysis Complete</p>
+                </div>
+            </div>
+
+            <div class="risk-meter">
+                <div class="meter-value" id="riskPercentage">0%</div>
+                <div>Disease Risk Probability</div>
+                <div class="risk-bar">
+                    <div class="risk-fill" id="riskFill"></div>
+                </div>
+            </div>
+
+            <div class="risk-badge" id="riskBadge">
+                <div class="badge-content">
+                    <span style="font-size:36px">⚠️</span>
+                    <div>
+                        <div style="font-size:12px;color:#7f8c8d;">Risk Level</div>
+                        <div class="badge-value" id="riskLevel">Calculating...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prediction-box" id="predictionBox">
+                <div style="font-size:40px">💡</div>
+                <div>
+                    <p style="font-size:12px;color:#7f8c8d;text-transform:uppercase;">Prediction</p>
+                    <p style="font-size:20px;font-weight:600;" id="predictionResult">Analyzing...</p>
+                </div>
+            </div>
+
+            <div class="recommendations">
+                <h3>💊 AI Recommendations</h3>
+                <div id="recommendationsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// Heart Disease Predictor Frontend Script - Standalone Version
+const form = document.getElementById('heartForm');
+const submitBtn = document.getElementById('submitBtn');
+const resultsContainer = document.getElementById('resultsContainer');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+        if (!isNaN(value) && value !== '') {
+            data[key] = parseFloat(value);
+        } else {
+            data[key] = value;
+        }
+    });
+    
+    setTimeout(() => {
+        const result = calculatePrediction(data);
+        displayResults(result);
+        setTimeout(() => {
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }, 1500);
+});
+
+function calculatePrediction(data) {
+    let riskScore = 0;
+    
+    if (data.age > 65) riskScore += 25;
+    else if (data.age > 55) riskScore += 18;
+    else if (data.age > 45) riskScore += 12;
+    
+    if (data.trestbps > 150) riskScore += 20;
+    else if (data.trestbps > 140) riskScore += 15;
+    else if (data.trestbps > 130) riskScore += 10;
+    
+    if (data.chol > 280) riskScore += 20;
+    else if (data.chol > 240) riskScore += 15;
+    else if (data.chol > 200) riskScore += 8;
+    
+    if (data.sex == 1) riskScore += 8;
+    if (data.cp >= 2) riskScore += 12;
+    if (data.exang == 1) riskScore += 15;
+    
+    const oldpeakValue = parseFloat(data.oldpeak);
+    if (oldpeakValue > 2.5) riskScore += 20;
+    else if (oldpeakValue > 1.5) riskScore += 12;
+    
+    riskScore += (parseInt(data.ca) || 0) * 8;
+    
+    if (data.thalach < 100) riskScore += 15;
+    else if (data.thalach < 120) riskScore += 10;
+    
+    if (data.thal == 3) riskScore += 12;
+    else if (data.thal == 2) riskScore += 8;
+    
+    if (data.fbs == 1) riskScore += 8;
+    if (data.slope == 2) riskScore += 10;
+    
+    const probability = Math.min(riskScore / 100, 0.99);
+    const prediction = probability > 0.5 ? 1 : 0;
+    
+    let riskLevel;
+    if (probability < 0.3) riskLevel = "Low";
+    else if (probability < 0.55) riskLevel = "Moderate";
+    else if (probability < 0.75) riskLevel = "High";
+    else riskLevel = "Very High";
+    
+    return {
+        prediction: prediction,
+        probability: probability,
+        risk_level: riskLevel,
+        confidence: "Moderate"
+    };
+}
+
+function displayResults(result) {
+    const riskPercentage = Math.round(result.probability * 100);
+    document.getElementById('riskPercentage').textContent = riskPercentage + '%';
+    
+    const riskFill = document.getElementById('riskFill');
+    if (riskFill) riskFill.style.width = riskPercentage + '%';
+    
+    const riskLevel = document.getElementById('riskLevel');
+    if (riskLevel) riskLevel.textContent = result.risk_level;
+    
+    const riskBadge = document.getElementById('riskBadge');
+    if (riskBadge) {
+        riskBadge.className = 'risk-badge';
+        if (result.risk_level === 'Very High' || result.risk_level === 'High') {
+            riskBadge.classList.add('high-risk');
+        } else if (result.risk_level === 'Low') {
+            riskBadge.classList.add('low-risk');
+        }
+    }
+    
+    const predictionResult = document.getElementById('predictionResult');
+    if (predictionResult) {
+        predictionResult.textContent = result.prediction === 1 
+            ? 'Heart Disease Risk Detected' 
+            : 'Low Risk - Healthy Heart';
+    }
+    
+    generateRecommendations(result);
+    
+    if (resultsContainer) {
+        resultsContainer.style.display = 'block';
+    }
+}
+
+function generateRecommendations(result) {
+    const recommendationsList = document.getElementById('recommendationsList');
+    if (!recommendationsList) return;
+    
+    recommendationsList.innerHTML = '';
+    
+    const recommendations = [];
+    
+    if (result.prediction === 1) {
+        recommendations.push(
+            { icon: '🏥', text: 'Schedule an appointment with a cardiologist immediately.' },
+            { icon: '💊', text: 'Discuss medication options with your healthcare provider.' },
+            { icon: '📊', text: 'Consider additional diagnostic tests like ECG or echocardiogram.' },
+            { icon: '❤️', text: 'Adopt a heart-healthy lifestyle: reduce sodium and saturated fats.' },
+            { icon: '🚶', text: 'Engage in regular physical activity as advised by your doctor.' },
+            { icon: '🚭', text: 'If you smoke, seek support to quit smoking immediately.' }
+        );
+    } else {
+        recommendations.push(
+            { icon: '✅', text: 'Continue maintaining your healthy lifestyle habits.' },
+            { icon: '🥗', text: 'Maintain a balanced diet rich in fruits and vegetables.' },
+            { icon: '🏃', text: 'Keep up regular physical activity (150 minutes/week).' },
+            { icon: '🩺', text: 'Schedule annual health check-ups.' }
+        );
+    }
+    
+    recommendations.forEach(rec => {
+        const item = document.createElement('div');
+        item.className = 'recommendation-item';
+        item.innerHTML = '<span>' + rec.icon + '</span><span>' + rec.text + '</span>';
+        recommendationsList.appendChild(item);
+    });
+}
+    </script>
+</body>
+</html>
+

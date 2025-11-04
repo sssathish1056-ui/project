@@ -1,0 +1,143 @@
+================================================================================
+    🩺 HEART DISEASE PREDICTOR - COMPLETE RUN GUIDE
+================================================================================
+
+YOUR WEBSITE IS READY! Here's how to run it:
+
+================================================================================
+STEP 1: INSTALL NODE.JS (If not installed)
+================================================================================
+
+Download and install Node.js from: https://nodejs.org/
+Choose the LTS version for Windows.
+
+After installation, RESTART your computer.
+
+================================================================================
+STEP 2: OPEN POWERShell IN THIS FOLDER
+================================================================================
+
+1. Press Windows Key + X
+2. Select "Windows PowerShell" or "Terminal"
+3. Type: cd "C:\Users\santhiya\Desktop\sathishsanthiya"
+4. Press Enter
+
+================================================================================
+STEP 3: INSTALL DEPENDENCIES
+================================================================================
+
+In PowerShell, type and press Enter:
+
+    npm install
+
+Wait for it to complete (might take 1-2 minutes).
+
+================================================================================
+STEP 4: START THE SERVER
+================================================================================
+
+In the same PowerShell window, type:
+
+    npm start
+
+You should see: "Server running on http://localhost:3000"
+
+KEEP THIS WINDOW OPEN!
+
+================================================================================
+STEP 5: OPEN IN BROWSER
+================================================================================
+
+1. Open your web browser (Chrome, Edge, Firefox)
+2. Go to: http://localhost:3000
+3. You'll see your beautiful Heart Disease Predictor website!
+
+================================================================================
+STEP 6: TEST IT
+================================================================================
+
+1. Fill in the form with sample data:
+   - Age: 63
+   - Sex: Male
+   - Chest Pain: Atypical angina
+   - Blood Pressure: 145
+   - Cholesterol: 233
+   - Fasting Blood Sugar: Yes
+   - Resting ECG: Normal
+   - Max Heart Rate: 150
+   - Exercise Angina: No
+   - ST Depression: 2.3
+   - Slope: Upsloping
+   - Major Vessels: 0
+   - Thalassemia: Normal
+
+2. Click "🔍 Analyze Heart Risk" button
+3. See the results appear with risk visualization!
+
+================================================================================
+✅ IT WORKS WITHOUT PYTHON!
+================================================================================
+
+Your website has "Demo Mode" built-in that works immediately!
+No need to install Python or train models - it just works!
+
+================================================================================
+WHAT YOU GET:
+================================================================================
+
+✅ Beautiful gradient UI with animations
+✅ AI Assistant chat messages
+✅ Live risk calculation
+✅ Visual risk meters and badges
+✅ AI-generated health recommendations
+✅ Professional medical disclaimer
+✅ Responsive design (works on mobile too!)
+
+================================================================================
+FOR PRODUCTION USE (Optional):
+================================================================================
+
+If you want real machine learning predictions:
+
+1. Install Python from python.org
+2. Run: pip install -r requirements.txt
+3. Run: python ml\train_model.py
+4. Restart: npm start
+
+The server automatically uses ML if available, otherwise uses Demo Mode.
+
+================================================================================
+STOPPING THE SERVER:
+================================================================================
+
+In the PowerShell window, press: Ctrl + C
+
+================================================================================
+TROUBLESHOOTING:
+================================================================================
+
+"npm command not found"
+→ Install Node.js and restart computer
+
+"Port already in use"
+→ Close other programs or change port in server.js
+
+"Button doesn't work"
+→ Make sure PowerShell shows "Server running on..."
+
+"Cannot connect"
+→ Make sure server is running and use http://localhost:3000
+
+================================================================================
+NEED HELP?
+================================================================================
+
+Check: START_HERE.md for quick reference
+Check: README.md for detailed documentation
+
+================================================================================
+
+Enjoy your AI-powered Heart Disease Predictor! 🎉
+
+================================================================================
+

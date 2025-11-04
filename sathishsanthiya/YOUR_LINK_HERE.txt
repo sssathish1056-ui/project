@@ -1,0 +1,27 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║        🌐 YOUR HEART DISEASE PREDICTOR LINK 🌐             ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        👉👉👉  http://localhost:8000/index.html  👈👈👈
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+TO START THE SERVER AND OPEN THIS LINK:
+
+1. Double-click: CLICK_THIS.bat
+   OR
+2. Open: START.bat
+   OR
+3. Run in PowerShell: python start_server.py
+
+Then the link above will work!
+
+═══════════════════════════════════════════════════════════════
+
+

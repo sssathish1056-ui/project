@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🩺 Heart Disease AI Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="heart-icon">❤️</div>
+                <h1>HeartGuard AI</h1>
+            </div>
+            <p class="tagline">Advanced AI-Powered Heart Disease Risk Assessment</p>
+        </header>
+
+        <!-- AI Assistant Chat -->
+        <div class="ai-chat-container" id="aiChat">
+            <div class="chat-header">
+                <div class="ai-avatar">🤖</div>
+                <div>
+                    <h3>AI Health Assistant</h3>
+                    <p>I'll help you understand your heart health</p>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <p>Hello! I'm your AI health assistant. I can analyze your medical data to assess your heart disease risk.</p>
+                        <p>Please fill in the patient information form below, and I'll provide an instant prediction with detailed insights.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Form -->
+        <div class="form-container">
+            <h2>Patient Information Form</h2>
+            
+            <form id="heartForm">
+                <div class="form-grid">
+                    <!-- Personal Info -->
+                    <div class="form-group ethical-notice">
+                        <div class="notice">
+                            <p>🔒 <strong>Privacy Notice:</strong> All data is processed locally. Your information is never stored or shared.</p>
+                        </div>
+                    </div>
+
+                    <!-- Demographics -->
+                    <div class="form-group">
+                        <label for="age">Age (years) <span class="required">*</span></label>
+                        <input type="number" id="age" name="age" min="18" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Sex <span class="required">*</span></label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select...</option>
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                        </select>
+                    </div>
+
+                    <!-- Chest Pain -->
+                    <div class="form-group">
+                        <label for="cp">Chest Pain Type <span class="required">*</span></label>
+                        <select id="cp" name="cp" required>
+                            <option value="">Select...</option>
+                            <option value="0">Typical angina</option>
+                            <option value="1">Atypical angina</option>
+                            <option value="2">Non-anginal pain</option>
+                            <option value="3">Asymptomatic</option>
+                        </select>
+                    </div>
+
+                    <!-- Blood Pressure -->
+                    <div class="form-group">
+                        <label for="trestbps">Resting Blood Pressure (mm Hg) <span class="required">*</span></label>
+                        <input type="number" id="trestbps" name="trestbps" min="90" max="200" required>
+                        <small>Normal range: 90-120</small>
+                    </div>
+
+                    <!-- Cholesterol -->
+                    <div class="form-group">
+                        <label for="chol">Serum Cholesterol (mg/dl) <span class="required">*</span></label>
+                        <input type="number" id="chol" name="chol" min="100" max="600" required>
+                        <small>Normal range: Below 200</small>
+                    </div>
+
+                    <!-- Fasting Blood Sugar -->
+                    <div class="form-group">
+                        <label for="fbs">Fasting Blood Sugar > 120 mg/dl <span class="required">*</span></label>
+                        <select id="fbs" name="fbs" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <!-- Resting ECG -->
+                    <div class="form-group">
+                        <label for="restecg">Resting ECG Results <span class="required">*</span></label>
+                        <select id="restecg" name="restecg" required>
+                            <option value="">Select...</option>
+                            <option value="0">Normal</option>
+                            <option value="1">ST-T wave abnormality</option>
+                            <option value="2">Left ventricular hypertrophy</option>
+                        </select>
+                    </div>
+
+                    <!-- Max Heart Rate -->
+                    <div class="form-group">
+                        <label for="thalach">Maximum Heart Rate Achieved <span class="required">*</span></label>
+                        <input type="number" id="thalach" name="thalach" min="60" max="220" required>
+                    </div>
+
+                    <!-- Exercise Angina -->
+                    <div class="form-group">
+                        <label for="exang">Exercise Induced Angina <span class="required">*</span></label>
+                        <select id="exang" name="exang" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <!-- ST Depression -->
+                    <div class="form-group">
+                        <label for="oldpeak">ST Depression Induced <span class="required">*</span></label>
+                        <input type="number" id="oldpeak" name="oldpeak" step="0.1" min="0" max="10" required>
+                        <small>Exercise relative to rest</small>
+                    </div>
+
+                    <!-- Slope -->
+                    <div class="form-group">
+                        <label for="slope">Slope of Peak Exercise ST <span class="required">*</span></label>
+                        <select id="slope" name="slope" required>
+                            <option value="">Select...</option>
+                            <option value="0">Upsloping</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Downsloping</option>
+                        </select>
+                    </div>
+
+                    <!-- Major Vessels -->
+                    <div class="form-group">
+                        <label for="ca">Number of Major Vessels Colored (0-3) <span class="required">*</span></label>
+                        <input type="number" id="ca" name="ca" min="0" max="3" required>
+                    </div>
+
+                    <!-- Thalassemia -->
+                    <div class="form-group">
+                        <label for="thal">Thalassemia Type <span class="required">*</span></label>
+                        <select id="thal" name="thal" required>
+                            <option value="">Select...</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Fixed defect</option>
+                            <option value="3">Reversible defect</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn" class="btn-primary">
+                        <span class="btn-icon">🔍</span>
+                        <span class="btn-text">Analyze Heart Risk</span>
+                    </button>
+                    <button type="reset" class="btn-secondary">Clear Form</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-container" id="resultsContainer" style="display: none;">
+            <div class="result-header">
+                <div class="result-icon">🩺</div>
+                <div class="result-header-text">
+                    <h2>Assessment Results</h2>
+                    <p class="result-subtitle">Generated by AI Analysis</p>
+                </div>
+            </div>
+
+            <div class="result-content">
+                <div class="risk-meter">
+                    <div class="meter-container">
+                        <div class="meter-value" id="riskPercentage">0%</div>
+                        <div class="meter-label">Disease Risk Probability</div>
+                        <div class="risk-bar">
+                            <div class="risk-fill" id="riskFill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-badge" id="riskBadge">
+                    <div class="badge-content">
+                        <span class="badge-icon">⚠️</span>
+                        <div>
+                            <div class="badge-title">Risk Level</div>
+                            <div class="badge-value" id="riskLevel">Calculating...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prediction-box" id="predictionBox">
+                    <div class="prediction-icon">💡</div>
+                    <div class="prediction-text">
+                        <p class="prediction-label">Prediction</p>
+                        <p class="prediction-result" id="predictionResult">Analyzing...</p>
+                    </div>
+                </div>
+
+                <div class="confidence-box">
+                    <p><strong>Confidence Level:</strong> <span id="confidenceLevel">-</span></p>
+                    <p><strong>Algorithm Used:</strong> Machine Learning Ensemble Model</p>
+                </div>
+
+                <div class="recommendations">
+                    <h3>💊 AI Recommendations</h3>
+                    <div class="recommendation-list" id="recommendationsList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="resetForm()">
+                    <span class="btn-icon">🔄</span>
+                    New Analysis
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>⚠️ <strong>Disclaimer:</strong> This tool is for educational purposes only. It does not replace professional medical advice, diagnosis, or treatment.</p>
+                <p>Always consult with qualified healthcare professionals for medical concerns.</p>
+                <p class="footer-tech">Powered by AI | Scikit-Learn | Node.js | Express</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>AI is analyzing your data...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
